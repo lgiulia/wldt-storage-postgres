@@ -29,6 +29,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,11 +50,10 @@ public class PostgresWldtStorage extends WldtStorage {
     private PostgresPhysicalAssetEventNotificationService physicalAssetEventNotificationService;
     private PostgresPhysicalAssetActionRequestService physicalAssetActionRequestService;
     private PostgresDigitalActionRequestService digitalActionRequestService;
-    private PostgresPhysicalAssetDescriptionNotificationService PhysicalAssetDescriptionNotificationService;
+    private PostgresPhysicalAssetDescriptionNotificationService physicalAssetDescriptionNotificationService;
     private PostgresPhysicalAssetDescriptionNotificationService updatedPhysicalAssetDescriptionNotificationService;
     private PostgresPhysicalAssetPropertyVariationService physicalAssetPropertyVariationService;
-    private PostgresPhysicalRelationshipInstanceVariationService  physicalRelationshipInstanceCreatedNotification;
-    private PostgresPhysicalRelationshipInstanceVariationService physicalRelationshipInstanceDeletedNotification;
+    private PostgresPhysicalRelationshipInstanceVariationService physicalRelationshipInstanceVariationService;
 
     public PostgresWldtStorage(String storageId, boolean observeAll, PostgresWldtStorageConfiguration configuration) throws StorageException {
         super(storageId, observeAll);
@@ -110,11 +110,10 @@ public class PostgresWldtStorage extends WldtStorage {
         this.physicalAssetEventNotificationService = new PostgresPhysicalAssetEventNotificationService(this.connection);
         this.physicalAssetActionRequestService = new PostgresPhysicalAssetActionRequestService(this.connection);
         this.digitalActionRequestService = null;
-        this.PhysicalAssetDescriptionNotificationService = new PostgresPhysicalAssetDescriptionNotificationService(this.connection);
+        this.physicalAssetDescriptionNotificationService = new PostgresPhysicalAssetDescriptionNotificationService(this.connection);
         this.updatedPhysicalAssetDescriptionNotificationService = null;
         this.physicalAssetPropertyVariationService = new PostgresPhysicalAssetPropertyVariationService(this.connection);
-        this.physicalRelationshipInstanceCreatedNotification = null;
-        this.physicalRelationshipInstanceDeletedNotification = null;
+        this.physicalRelationshipInstanceVariationService = new PostgresPhysicalRelationshipInstanceVariationService(this.connection);
     }
 
     private void checkRange(int startIndex, int endIndex, int valuesCount) {
@@ -287,13 +286,13 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void saveNewPhysicalAssetDescriptionNotification(PhysicalAssetDescriptionNotification physicalAssetDescriptionNotification) throws StorageException {
-        if (this.PhysicalAssetDescriptionNotificationService != null) {
+        if (this.physicalAssetDescriptionNotificationService != null) {
             PhysicalAssetDescriptionNotificationRecord record = new PhysicalAssetDescriptionNotificationRecord(
                     physicalAssetDescriptionNotification.getNotificationTimestamp(),
                     physicalAssetDescriptionNotification.getAdapterId(),
                     physicalAssetDescriptionNotification.getPhysicalAssetDescription()
             );
-            this.PhysicalAssetDescriptionNotificationService.saveRecord(record);
+            this.physicalAssetDescriptionNotificationService.saveRecord(record);
         }
     }
 
@@ -362,7 +361,40 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void savePhysicalAssetRelationshipInstanceCreatedNotification(PhysicalRelationshipInstanceVariation physicalRelationshipInstanceVariation) throws StorageException {
+        if (this.physicalRelationshipInstanceVariationService != null) {
 
+            PhysicalAssetRelationshipInstance<?> instance = physicalRelationshipInstanceVariation.getPhysicalAssetRelationshipInstance();
+
+            PhysicalRelationshipInstanceVariationRecord record = new PhysicalRelationshipInstanceVariationRecord(
+                    physicalRelationshipInstanceVariation.getNotificationTimestamp(),
+                    instance.getKey(),
+                    instance.getTargetId(),
+                    instance.getRelationship().getName(),
+                    "created",
+                    instance.getMetadata().orElse(new HashMap<>())
+            );
+
+            this.physicalRelationshipInstanceVariationService.saveRecord(record);
+        }
+    }
+
+    @Override
+    public void savePhysicalAssetRelationshipInstanceDeletedNotification(PhysicalRelationshipInstanceVariation physicalRelationshipInstanceVariation) throws StorageException {
+        if (this.physicalRelationshipInstanceVariationService != null) {
+
+            PhysicalAssetRelationshipInstance<?> instance = physicalRelationshipInstanceVariation.getPhysicalAssetRelationshipInstance();
+
+            PhysicalRelationshipInstanceVariationRecord record = new PhysicalRelationshipInstanceVariationRecord(
+                    physicalRelationshipInstanceVariation.getNotificationTimestamp(),
+                    instance.getKey(),
+                    instance.getTargetId(),
+                    instance.getRelationship().getName(),
+                    "deleted",
+                    instance.getMetadata().orElse(new HashMap<>())
+            );
+
+            this.physicalRelationshipInstanceVariationService.saveRecord(record);
+        }
     }
 
     @Override
@@ -376,13 +408,8 @@ public class PostgresWldtStorage extends WldtStorage {
     }
 
     @Override
-    public List<PhysicalRelationshipInstanceVariationRecord> getPhysicalAssetRelationshipInstanceCreatedNotificationInRange(int startIndex, int endIndex) throws StorageException, IllegalArgumentException {
+    public List<PhysicalRelationshipInstanceVariationRecord> getPhysicalAssetRelationshipInstanceCreatedNotificationInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
         return Collections.emptyList();
-    }
-
-    @Override
-    public void savePhysicalAssetRelationshipInstanceDeletedNotification(PhysicalRelationshipInstanceVariation physicalRelationshipInstanceVariation) throws StorageException {
-
     }
 
     @Override

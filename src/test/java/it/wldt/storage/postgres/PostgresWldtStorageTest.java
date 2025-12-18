@@ -168,4 +168,29 @@ public class PostgresWldtStorageTest {
 
         logger.info("Test DescriptionNotification: PASSED");
     }
+
+    @Test
+    public void testPhysicalRelationshipInstanceVariation() throws StorageException {
+        logger.info("Testing PhysicalRelationshipInstanceVariation...");
+
+        PhysicalAssetRelationship<String> relationship = new PhysicalAssetRelationship<>("connected-to", "parent-child");
+
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("signal-strength", "strong");
+
+        PhysicalAssetRelationshipInstance<String> instance = new PhysicalAssetRelationshipInstance<>(
+                relationship,
+                "charging-station-x",
+                metadata
+        );
+
+        PhysicalRelationshipInstanceVariation variation = new PhysicalRelationshipInstanceVariation(
+                System.currentTimeMillis(),
+                instance
+        );
+
+        storage.savePhysicalAssetRelationshipInstanceCreatedNotification(variation);
+
+        logger.info("Test PhysicalRelationshipInstanceVariation: PASSED");
+    }
 }

@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67417f63-a866-49a5-aa38-0922ae183bdc" name="Changes" comment="" />
+    <list default="true" id="67417f63-a866-49a5-aa38-0922ae183bdc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/queries/Query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/queries/Query.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +45,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lgiulia&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lgiulia/wldt-storage-postgres.git&quot;,
+    &quot;accountId&quot;: &quot;cb0399c3-ee69-4c55-b8dd-27b175abf78f&quot;
+  }
+}</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\hp\.gradle\wrapper\dists\gradle-8.14-bin\38aieal9i53h9rfe7vjup95b9\gradle-8.14" javaHome="C:\Users\hp\.jdks\corretto-24.0.2" gradleVersion="8.14" />
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -66,6 +85,7 @@
     "Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testPhysicalEventNotification.executor": "Run",
+    "Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testSaveDigitalTwinState.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testSaveLifeCycleState.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -91,7 +111,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification">
+  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation">
     <configuration name="PostgresWldtStorageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -200,7 +220,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalEventNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -213,7 +233,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalEventNotification&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -235,11 +255,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" />
+        <item itemvalue="Gradle.PostgresWldtStorageTest" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetActionRequest" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalEventNotification" />
       </list>
     </recent_temporary>
   </component>
@@ -266,7 +286,8 @@
       <workItem from="1765437171729" duration="6521000" />
       <workItem from="1765803528930" duration="5515000" />
       <workItem from="1765870256767" duration="5008000" />
-      <workItem from="1765875360898" duration="50000" />
+      <workItem from="1765875360898" duration="104000" />
+      <workItem from="1766043798935" duration="7185000" />
     </task>
     <servers />
   </component>
