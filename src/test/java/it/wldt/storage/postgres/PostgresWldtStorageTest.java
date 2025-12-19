@@ -3,10 +3,7 @@ package it.wldt.storage.postgres;
 import it.wldt.adapter.physical.*;
 import it.wldt.core.engine.LifeCycleState;
 import it.wldt.core.engine.LifeCycleStateVariation;
-import it.wldt.core.state.DigitalTwinState;
-import it.wldt.core.state.DigitalTwinStateChange;
-import it.wldt.core.state.DigitalTwinStateManager;
-import it.wldt.core.state.DigitalTwinStateProperty;
+import it.wldt.core.state.*;
 import it.wldt.exception.StorageException;
 import it.wldt.exception.WldtDigitalTwinStateException;
 import it.wldt.storage.postgres.model.common.PostgresWldtStorageConfiguration;
@@ -65,6 +62,22 @@ public class PostgresWldtStorageTest {
         storage.saveDigitalTwinState(state, changes);
 
         logger.info("Test saveDigitalTwin: PASSED");
+    }
+
+    // Test to save Digital Twin State Event Notification
+    @Test
+    public void testDigitalTwinStateEventNotification() throws StorageException {
+        logger.info("Testing digitalTwinStateEventNotification...");
+
+        DigitalTwinStateEventNotification<String> notification = new DigitalTwinStateEventNotification<>(
+                "computation-completed",
+                "Result: 99,9%",
+                System.currentTimeMillis()
+        );
+
+        storage.saveDigitalTwinStateEventNotification(notification);
+
+        logger.info("Test saveDigitalTwinStateEventNotification: PASSED");
     }
 
     // Test to save Digital Twin Lifecycle

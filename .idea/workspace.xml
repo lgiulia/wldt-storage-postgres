@@ -9,7 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/queries/Query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/queries/Query.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +91,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
@@ -111,7 +112,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation">
+  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification">
     <configuration name="PostgresWldtStorageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -139,7 +140,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalAssetActionRequest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostgresWldtStorageTest.testDigitalTwinStateEventNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -152,7 +153,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalAssetActionRequest&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testDigitalTwinStateEventNotification&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -255,11 +256,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" />
         <item itemvalue="Gradle.PostgresWldtStorageTest" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetActionRequest" />
       </list>
     </recent_temporary>
   </component>
@@ -287,7 +288,9 @@
       <workItem from="1765803528930" duration="5515000" />
       <workItem from="1765870256767" duration="5008000" />
       <workItem from="1765875360898" duration="104000" />
-      <workItem from="1766043798935" duration="7185000" />
+      <workItem from="1766043798935" duration="10073000" />
+      <workItem from="1766131700406" duration="392000" />
+      <workItem from="1766132822979" duration="1790000" />
     </task>
     <servers />
   </component>

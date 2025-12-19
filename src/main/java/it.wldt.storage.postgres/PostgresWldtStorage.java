@@ -105,7 +105,7 @@ public class PostgresWldtStorage extends WldtStorage {
 
     private void initServices() {
         this.digitalTwinStateService = new PostgresDigitalTwinStateService(this.connection);
-        this.digitalTwinStateEventNotificationService = null;
+        this.digitalTwinStateEventNotificationService = new PostgresDigitalTwinStateEventNotificationService(this.connection);
         this.lifeCycleStateService = null;
         this.physicalAssetEventNotificationService = new PostgresPhysicalAssetEventNotificationService(this.connection);
         this.physicalAssetActionRequestService = new PostgresPhysicalAssetActionRequestService(this.connection);
@@ -165,7 +165,14 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void saveDigitalTwinStateEventNotification(DigitalTwinStateEventNotification<?> digitalTwinStateEventNotification) throws StorageException {
-
+        if (this.digitalTwinStateEventNotificationService != null) {
+            DigitalTwinStateEventNotificationRecord record = new DigitalTwinStateEventNotificationRecord(
+                    digitalTwinStateEventNotification.getDigitalEventKey(),
+                    digitalTwinStateEventNotification.getBody(),
+                    digitalTwinStateEventNotification.getTimestamp()
+            );
+            this.digitalTwinStateEventNotificationService.saveRecord(record);
+        }
     }
 
     @Override
