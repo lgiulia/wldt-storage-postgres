@@ -1,5 +1,6 @@
 package it.wldt.storage.postgres;
 
+import it.wldt.adapter.digital.DigitalActionRequest;
 import it.wldt.adapter.physical.*;
 import it.wldt.core.engine.LifeCycleState;
 import it.wldt.core.engine.LifeCycleStateVariation;
@@ -182,6 +183,7 @@ public class PostgresWldtStorageTest {
         logger.info("Test DescriptionNotification: PASSED");
     }
 
+    // Test to save Physical Relationship Instance Variation
     @Test
     public void testPhysicalRelationshipInstanceVariation() throws StorageException {
         logger.info("Testing PhysicalRelationshipInstanceVariation...");
@@ -205,5 +207,26 @@ public class PostgresWldtStorageTest {
         storage.savePhysicalAssetRelationshipInstanceCreatedNotification(variation);
 
         logger.info("Test PhysicalRelationshipInstanceVariation: PASSED");
+    }
+
+    // Test to save Digital Action Request Service
+    @Test
+    public void testDigitalActionRequest() throws StorageException {
+        logger.info("Testing DigitalActionRequest...");
+
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("user-role", "admin");
+        metadata.put("priority", "high");
+
+        DigitalActionRequest request = new DigitalActionRequest(
+                System.currentTimeMillis(),
+                "backup-system",
+                "full-backup",
+                metadata
+        );
+
+        storage.saveDigitalActionRequest(request);
+
+        logger.info("Test DigitalActionRequest: PASSED");
     }
 }

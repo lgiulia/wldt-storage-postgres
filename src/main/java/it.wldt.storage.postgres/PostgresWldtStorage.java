@@ -109,7 +109,7 @@ public class PostgresWldtStorage extends WldtStorage {
         this.lifeCycleStateService = null;
         this.physicalAssetEventNotificationService = new PostgresPhysicalAssetEventNotificationService(this.connection);
         this.physicalAssetActionRequestService = new PostgresPhysicalAssetActionRequestService(this.connection);
-        this.digitalActionRequestService = null;
+        this.digitalActionRequestService = new PostgresDigitalActionRequestService(this.connection);
         this.physicalAssetDescriptionNotificationService = new PostgresPhysicalAssetDescriptionNotificationService(this.connection);
         this.updatedPhysicalAssetDescriptionNotificationService = null;
         this.physicalAssetPropertyVariationService = new PostgresPhysicalAssetPropertyVariationService(this.connection);
@@ -273,7 +273,15 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void saveDigitalActionRequest(DigitalActionRequest digitalActionRequest) throws StorageException {
-
+        if (this.digitalActionRequestService != null) {
+            DigitalActionRequestRecord record = new DigitalActionRequestRecord(
+                    digitalActionRequest.getRequestTimestamp(),
+                    digitalActionRequest.getActionkey(),
+                    digitalActionRequest.getRequestBody(),
+                    digitalActionRequest.getRequestMetadata()
+            );
+            this.digitalActionRequestService.saveRecord(record);
+        }
     }
 
     @Override
