@@ -7,9 +7,10 @@
     <list default="true" id="67417f63-a866-49a5-aa38-0922ae183bdc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/queries/Query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/queries/Query.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +115,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testDigitalActionRequest">
+  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testSaveLifeCycleState">
     <configuration name="PostgresWldtStorageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -196,33 +197,6 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <GradleProfilingDisabled>false</GradleProfilingDisabled>
-      <GradleCoverageDisabled>false</GradleCoverageDisabled>
-      <method v="2" />
-    </configuration>
     <configuration name="PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -250,6 +224,33 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="PostgresWldtStorageTest.testSaveLifeCycleState" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testSaveLifeCycleState&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -258,11 +259,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testSaveLifeCycleState" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testDigitalActionRequest" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" />
         <item itemvalue="Gradle.PostgresWldtStorageTest" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" />
       </list>
     </recent_temporary>
   </component>
@@ -292,7 +293,7 @@
       <workItem from="1765875360898" duration="104000" />
       <workItem from="1766043798935" duration="10073000" />
       <workItem from="1766131700406" duration="392000" />
-      <workItem from="1766132822979" duration="3213000" />
+      <workItem from="1766132822979" duration="4105000" />
     </task>
     <servers />
   </component>

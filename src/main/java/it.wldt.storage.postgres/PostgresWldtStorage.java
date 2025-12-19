@@ -106,7 +106,7 @@ public class PostgresWldtStorage extends WldtStorage {
     private void initServices() {
         this.digitalTwinStateService = new PostgresDigitalTwinStateService(this.connection);
         this.digitalTwinStateEventNotificationService = new PostgresDigitalTwinStateEventNotificationService(this.connection);
-        this.lifeCycleStateService = null;
+        this.lifeCycleStateService = new PostgresLifeCycleStateService(this.connection);
         this.physicalAssetEventNotificationService = new PostgresPhysicalAssetEventNotificationService(this.connection);
         this.physicalAssetActionRequestService = new PostgresPhysicalAssetActionRequestService(this.connection);
         this.digitalActionRequestService = new PostgresDigitalActionRequestService(this.connection);
@@ -192,7 +192,13 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void saveLifeCycleState(LifeCycleStateVariation lifeCycleStateVariation) throws StorageException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (this.lifeCycleStateService != null) {
+            LifeCycleVariationRecord record = new LifeCycleVariationRecord(
+                    lifeCycleStateVariation.getLifeCycleState(),
+                    lifeCycleStateVariation.getTimestamp()
+            );
+            this.lifeCycleStateService.saveRecord(record);
+        }
     }
 
     @Override

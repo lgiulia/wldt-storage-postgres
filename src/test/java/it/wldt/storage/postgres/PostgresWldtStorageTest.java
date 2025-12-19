@@ -83,7 +83,7 @@ public class PostgresWldtStorageTest {
 
     // Test to save Digital Twin Lifecycle
     @Test
-    public void testSaveLifeCycleState() {
+    public void testSaveLifeCycleState() throws StorageException{
         logger.info("Testing saveLifeCycleState...");
 
         LifeCycleStateVariation variation = new LifeCycleStateVariation(
@@ -91,9 +91,7 @@ public class PostgresWldtStorageTest {
                 LifeCycleState.STARTED
         );
 
-        assertThrows(UnsupportedOperationException.class, () -> {
-            storage.saveLifeCycleState(variation);
-        });
+        storage.saveLifeCycleState(variation);
 
         logger.info("Test saveLifeCycleState: PASSED");
     }

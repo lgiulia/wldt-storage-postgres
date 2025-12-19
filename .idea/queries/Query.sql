@@ -56,6 +56,12 @@ CREATE TABLE digital_action_request (
     data JSONB NOT NULL
 );
 
+CREATE TABLE lifecycle_state (
+    id SERIAL PRIMARY KEY,
+    timestamp BIGINT NOT NULL,
+    state VARCHAR(255) NOT NULL
+);
+
 CREATE INDEX idx_dt_state_timestamp ON digital_twin_state(timestamp);
 CREATE INDEX idx_dt_event_timestamp ON digital_twin_state_event(timestamp);
 CREATE INDEX idx_pa_event_timestamp ON physical_asset_event(timestamp);
@@ -64,3 +70,4 @@ CREATE INDEX idx_pa_property_var_timestamp ON physical_asset_property_variation(
 CREATE INDEX idx_pa_desc_timestamp ON physical_asset_description(timestamp);
 CREATE INDEX idx_pa_rel_timestamp ON physical_relationship_instance_variation(timestamp);
 CREATE INDEX idx_digital_action_timestamp ON digital_action_request(timestamp);
+CREATE INDEX idx_lifecycle_timestamp ON lifecycle_state(timestamp);
