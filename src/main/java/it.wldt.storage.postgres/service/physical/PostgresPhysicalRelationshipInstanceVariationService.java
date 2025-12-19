@@ -62,10 +62,10 @@ public class PostgresPhysicalRelationshipInstanceVariationService {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new StorageException("Saving action request SQL error: " + e.getMessage());
+            throw new StorageException("Saving relationship variation SQL error: " + e.getMessage());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new StorageException("Saving action request JSON error: " + e.getMessage());
+            throw new StorageException("Saving relationship variation JSON error: " + e.getMessage());
         }
     }
 

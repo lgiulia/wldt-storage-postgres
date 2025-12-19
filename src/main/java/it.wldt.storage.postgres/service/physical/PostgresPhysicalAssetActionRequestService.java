@@ -54,10 +54,10 @@ public class PostgresPhysicalAssetActionRequestService {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new StorageException("Saving action request SQL error: " + e.getMessage());
+            throw new StorageException("Saving physical action request SQL error: " + e.getMessage());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new StorageException("Saving action request JSON error: " + e.getMessage());
+            throw new StorageException("Saving physical action request JSON error: " + e.getMessage());
         }
     }
 

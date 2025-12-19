@@ -48,10 +48,10 @@ public class PostgresPhysicalAssetDescriptionNotificationService {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new StorageException("Errore SQL salvataggio descrizione: " + e.getMessage());
+            throw new StorageException("Saving physical asset description notification SQL error: " + e.getMessage());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new StorageException("Errore JSON salvataggio descrizione: " + e.getMessage());
+            throw new StorageException("Saving physical asset description notification JSON error: " + e.getMessage());
         }
     }
 

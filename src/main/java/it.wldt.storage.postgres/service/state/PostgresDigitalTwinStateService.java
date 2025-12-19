@@ -58,11 +58,10 @@ public class PostgresDigitalTwinStateService {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new StorageException("SQL Error: " + e.getMessage());
+            throw new StorageException("Saving dt state SQL error: " + e.getMessage());
         } catch (JsonProcessingException e) {
-            System.err.println("Jackson serialization error: " + e.getMessage());
             e.printStackTrace();
-            throw new StorageException("Error during JSON state conversion" + e.getMessage());
+            throw new StorageException("Saving dt state SQL error: " + e.getMessage());
         }
     }
 
