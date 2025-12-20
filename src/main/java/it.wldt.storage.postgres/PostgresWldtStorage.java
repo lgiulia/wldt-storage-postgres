@@ -111,7 +111,7 @@ public class PostgresWldtStorage extends WldtStorage {
         this.physicalAssetActionRequestService = new PostgresPhysicalAssetActionRequestService(this.connection);
         this.digitalActionRequestService = new PostgresDigitalActionRequestService(this.connection);
         this.physicalAssetDescriptionNotificationService = new PostgresPhysicalAssetDescriptionNotificationService(this.connection);
-        this.updatedPhysicalAssetDescriptionNotificationService = null;
+        this.updatedPhysicalAssetDescriptionNotificationService = new PostgresPhysicalAssetDescriptionNotificationService(this.connection);
         this.physicalAssetPropertyVariationService = new PostgresPhysicalAssetPropertyVariationService(this.connection);
         this.physicalRelationshipInstanceVariationService = new PostgresPhysicalRelationshipInstanceVariationService(this.connection);
     }
@@ -334,7 +334,14 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public void saveUpdatedPhysicalAssetDescriptionNotification(PhysicalAssetDescriptionNotification physicalAssetDescriptionNotification) throws StorageException {
-
+        if (this.updatedPhysicalAssetDescriptionNotificationService != null) {
+            PhysicalAssetDescriptionNotificationRecord record = new PhysicalAssetDescriptionNotificationRecord(
+                    physicalAssetDescriptionNotification.getNotificationTimestamp(),
+                    physicalAssetDescriptionNotification.getAdapterId(),
+                    physicalAssetDescriptionNotification.getPhysicalAssetDescription()
+            );
+            this.updatedPhysicalAssetDescriptionNotificationService.saveRecord(record);
+        }
     }
 
     @Override

@@ -181,6 +181,32 @@ public class PostgresWldtStorageTest {
         logger.info("Test DescriptionNotification: PASSED");
     }
 
+    // Test to save Updated Physical Asset Description Notification
+    @Test
+    public void testUpdatedPhysicalAssetDescriptionNotification() throws StorageException {
+        logger.info("Testing updatedPhysicalAssetDescriptionNotification...");
+
+        List<PhysicalAssetProperty<?>> properties = new ArrayList<>();
+        properties.add(new PhysicalAssetProperty<>("temperature", 22.0));
+
+        List<PhysicalAssetAction> actions = new ArrayList<>();
+        actions.add(new PhysicalAssetAction("switch-off", "action.switch", "application/json"));
+
+        List<PhysicalAssetEvent> events = new ArrayList<>();
+
+        PhysicalAssetDescription description = new PhysicalAssetDescription(actions, properties, events);
+
+        PhysicalAssetDescriptionNotification notification = new PhysicalAssetDescriptionNotification(
+                System.currentTimeMillis(),
+                "test-adapter-01-update",
+                description
+        );
+
+        storage.saveNewPhysicalAssetDescriptionNotification(notification);
+
+        logger.info("Test updatedPhysicalAssetDescriptionNotification: PASSED");
+    }
+
     // Test to save Physical Relationship Instance Variation
     @Test
     public void testPhysicalRelationshipInstanceVariation() throws StorageException {
