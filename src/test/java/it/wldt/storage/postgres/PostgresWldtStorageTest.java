@@ -62,7 +62,7 @@ public class PostgresWldtStorageTest {
 
         storage.saveDigitalTwinState(state, changes);
 
-        logger.info("Test saveDigitalTwin: PASSED");
+        logger.info("Test saveDigitalTwinState: PASSED");
     }
 
     // Test to save Digital Twin State Event Notification
@@ -113,7 +113,7 @@ public class PostgresWldtStorageTest {
 
         storage.savePhysicalAssetEventNotification(notification);
 
-        logger.info("Test PhysicalEventNotification: PASSED");
+        logger.info("Test PhysicalAssetEventNotification: PASSED");
     }
 
     // Test for PhysicalAssetActionRequest
@@ -133,7 +133,7 @@ public class PostgresWldtStorageTest {
 
         storage.savePhysicalAssetActionRequest(request);
 
-        logger.info("Test Action Request: PASSED");
+        logger.info("Test Physical Asset Action Request: PASSED");
     }
 
     // Test for PhysicalAssetPropertyVariation
@@ -150,7 +150,7 @@ public class PostgresWldtStorageTest {
 
         storage.savePhysicalAssetPropertyVariation(variation);
 
-        logger.info("Test PropertyVariation: PASSED");
+        logger.info("Test PhysicalAssetPropertyVariation: PASSED");
     }
 
     // Test for PhysicalAssetDescriptionNotification
@@ -178,7 +178,7 @@ public class PostgresWldtStorageTest {
 
         storage.saveNewPhysicalAssetDescriptionNotification(notification);
 
-        logger.info("Test DescriptionNotification: PASSED");
+        logger.info("Test PhysicalAssetDescriptionNotification: PASSED");
     }
 
     // Test to save Updated Physical Asset Description Notification
