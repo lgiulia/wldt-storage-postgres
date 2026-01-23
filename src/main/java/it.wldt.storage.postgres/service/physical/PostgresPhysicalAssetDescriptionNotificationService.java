@@ -11,6 +11,7 @@ import it.wldt.adapter.physical.PhysicalAssetDescriptionNotification;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.physical.PhysicalAssetDescriptionNotificationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class PostgresPhysicalAssetDescriptionNotificationService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.NEW_PHYSICAL_ASSET_DESCRIPTION_NOTIFICATION.getTableName();
 
     // Default constructor
     public PostgresPhysicalAssetDescriptionNotificationService(Connection connection) {
@@ -38,7 +41,7 @@ public class PostgresPhysicalAssetDescriptionNotificationService {
     @param record  Record core WLDT to save
      */
     public void saveRecord(PhysicalAssetDescriptionNotificationRecord record) throws StorageException {
-        String sql = "INSERT INTO physical_asset_description (timestamp, adapter_id, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, adapter_id, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, record.getNotificationTimestamp());

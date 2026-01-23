@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.physical.PhysicalAssetActionRequestRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ public class PostgresPhysicalAssetActionRequestService {
 
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.PHYSICAL_ACTION_REQUEST.getTableName();
 
     // Default Constructor
     public PostgresPhysicalAssetActionRequestService(Connection connection) {
@@ -40,7 +43,7 @@ public class PostgresPhysicalAssetActionRequestService {
      */
     public void saveRecord(PhysicalAssetActionRequestRecord record) throws StorageException {
         // SQL query
-        String sql = "INSERT INTO physical_asset_action_request (timestamp, action_key, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, action_key, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp

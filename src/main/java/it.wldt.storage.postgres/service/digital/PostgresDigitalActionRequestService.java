@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.digital.DigitalActionRequestRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,8 @@ import java.util.Optional;
 public class PostgresDigitalActionRequestService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.DIGITAL_ACTION_REQUEST.getTableName();
 
     // Constructor
     public PostgresDigitalActionRequestService(Connection connection) {
@@ -37,7 +40,7 @@ public class PostgresDigitalActionRequestService {
     @param record  The DigitalActionRequestRecord to save
      */
     public void saveRecord(DigitalActionRequestRecord record) throws StorageException {
-        String sql = "INSERT INTO digital_action_request (timestamp, action_key, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, action_key, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp

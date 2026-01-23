@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.physical.PhysicalAssetEventNotificationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,9 @@ import java.util.Optional;
 public class PostgresPhysicalAssetEventNotificationService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.PHYSICAL_ASSET_EVENT_NOTIFICATION.getTableName();
+
     // Default constructor
     public PostgresPhysicalAssetEventNotificationService(Connection connection) {
         this.connection = connection;
@@ -38,7 +42,7 @@ public class PostgresPhysicalAssetEventNotificationService {
     @param record Record of the WLDT core to save
      */
     public void saveRecord(PhysicalAssetEventNotificationRecord record) throws StorageException {
-        String sql = "INSERT INTO physical_asset_event (timestamp, event_key, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, event_key, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, record.getTimestamp());

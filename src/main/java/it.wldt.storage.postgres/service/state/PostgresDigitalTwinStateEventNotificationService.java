@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.state.DigitalTwinStateEventNotificationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class PostgresDigitalTwinStateEventNotificationService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.DIGITAL_TWIN_STATE_EVENT_NOTIFICATION.getTableName();
 
     // Default constructor
     public PostgresDigitalTwinStateEventNotificationService(Connection connection) {
@@ -40,7 +43,7 @@ public class PostgresDigitalTwinStateEventNotificationService {
      */
     public void saveRecord(DigitalTwinStateEventNotificationRecord record) throws StorageException {
         // Query sql
-        String sql = "INSERT INTO digital_twin_state_event (timestamp, event_key, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, event_key, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp

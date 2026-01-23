@@ -11,6 +11,7 @@ import it.wldt.adapter.physical.PhysicalAssetPropertyVariation;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.physical.PhysicalAssetPropertyVariationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class PostgresPhysicalAssetPropertyVariationService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.PHYSICAL_ASSET_PROPERTY_VARIATION.getTableName();
 
     // Default constructor
     public PostgresPhysicalAssetPropertyVariationService(Connection connection) {
@@ -39,7 +42,7 @@ public class PostgresPhysicalAssetPropertyVariationService {
      */
     public void saveRecord(PhysicalAssetPropertyVariationRecord record) throws StorageException {
         // Query SQL
-        String sql = "INSERT INTO physical_asset_property_variation (timestamp, property_key, data) VALUES (?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, property_key, data) VALUES (?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp

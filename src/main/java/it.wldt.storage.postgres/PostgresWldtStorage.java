@@ -16,6 +16,7 @@ import it.wldt.storage.model.physical.*;
 import it.wldt.storage.model.state.DigitalTwinStateEventNotificationRecord;
 import it.wldt.storage.model.state.DigitalTwinStateRecord;
 import it.wldt.storage.postgres.model.common.PostgresWldtStorageConfiguration;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 import it.wldt.storage.postgres.service.digital.PostgresDigitalActionRequestService;
 import it.wldt.storage.postgres.service.lifecycle.PostgresLifeCycleStateService;
 import it.wldt.storage.postgres.service.physical.*;
@@ -92,6 +93,8 @@ public class PostgresWldtStorage extends WldtStorage {
             // Open the connection
             this.connection = DriverManager.getConnection(url, user, password);
             logger.info("Connected to PostgreSQL database successfully!");
+            // Create Tables
+            this.createTablesIfNotExist();
             // Services initialize
             this.initServices();
         } catch (ClassNotFoundException e) {
@@ -462,6 +465,86 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     protected void clear() throws StorageException {
+    }
 
+    private void createTablesIfNotExist() throws SQLException {
+        logger.info("Creating/Verifying database tables...");
+
+        String[] tableCreationQueries = {
+
+                // Physical Asset Event Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.PHYSICAL_ASSET_EVENT_NOTIFICATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "event_key VARCHAR(255) NOT NULL, " +
+                "data JSONB NOT NULL)",
+
+                // Physical Asset Action Request Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.PHYSICAL_ACTION_REQUEST.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "action_key VARCHAR(255) NOT NULL, " +
+                "data JSONB NOT NULL)",
+
+                // Physical Asset Property Variation Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.PHYSICAL_ASSET_PROPERTY_VARIATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "property_key VARCHAR(255), " +
+                "data JSONB NOT NULL)",
+
+                // Physical Asset Description Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.NEW_PHYSICAL_ASSET_DESCRIPTION_NOTIFICATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "adapter_id VARCHAR(255), " +
+                "data JSONB NOT NULL)",
+
+                // Physical Relationship Instance Variation Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.PHYSICAL_ASSET_RELATIONSHIP_INSTANCE_CREATED_NOTIFICATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "instance_key VARCHAR(255) NOT NULL, " +
+                "instance_target_id VARCHAR(255), " +
+                "relationship_name VARCHAR(255), " +
+                "relationship_type VARCHAR(255), " +
+                "data JSONB NOT NULL)",
+
+                // Digital Twin State Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.DIGITAL_TWIN_STATE.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "data JSONB NOT NULL)",
+
+                // Digital Twin State Event Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.DIGITAL_TWIN_STATE_EVENT_NOTIFICATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "event_key VARCHAR(255) NOT NULL, " +
+                "data JSONB NOT NULL)",
+
+                // Digital Action Request Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.DIGITAL_ACTION_REQUEST.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "action_key VARCHAR(255) NOT NULL, " +
+                "data JSONB NOT NULL)",
+
+                // Lifecycle State Table
+                "CREATE TABLE IF NOT EXISTS " + PostgresWldtTableType.LIFE_CYCLE_STATE_VARIATION.getTableName() + " (" +
+                "id SERIAL PRIMARY KEY, " +
+                "timestamp BIGINT NOT NULL, " +
+                "state VARCHAR(255) NOT NULL)"
+        };
+
+        try (java.sql.Statement statement = this.connection.createStatement()) {
+            for (String query : tableCreationQueries) {
+                statement.executeUpdate(query);
+            }
+            logger.info("Tables created/verified successfully.");
+        } catch (SQLException e) {
+            logger.error("Error while creating tables in PostgresWldtStorage", e.getMessage());
+            throw e;
+        }
     }
 }

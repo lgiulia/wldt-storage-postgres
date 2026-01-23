@@ -7,6 +7,7 @@ import it.wldt.core.state.DigitalTwinState;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.state.DigitalTwinStateRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +27,8 @@ public class PostgresDigitalTwinStateService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
 
+    private static final String TABLE_NAME = PostgresWldtTableType.DIGITAL_TWIN_STATE.getTableName();
+
     // Default constructor
     public PostgresDigitalTwinStateService(Connection connection) {
         this.connection = connection;
@@ -42,7 +45,7 @@ public class PostgresDigitalTwinStateService {
     @param stateRecord  The WLDT record core to save
      */
     public void saveRecord(DigitalTwinStateRecord stateRecord) throws StorageException {
-        String sql = "INSERT INTO digital_twin_state (timestamp, data) VALUES (?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, data) VALUES (?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             long timestamp = System.currentTimeMillis();

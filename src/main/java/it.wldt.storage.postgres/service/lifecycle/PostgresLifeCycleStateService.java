@@ -3,6 +3,7 @@ package it.wldt.storage.postgres.service.lifecycle;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.lifecycle.LifeCycleVariationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class PostgresLifeCycleStateService {
     private final Connection connection;
 
+    private static final String TABLE_NAME = PostgresWldtTableType.LIFE_CYCLE_STATE_VARIATION.getTableName();
+
     // Constructor
     public PostgresLifeCycleStateService(Connection connection) {
         this.connection = connection;
@@ -23,7 +26,7 @@ public class PostgresLifeCycleStateService {
     @param record  the record to save
      */
     public void saveRecord(LifeCycleVariationRecord record) throws StorageException {
-        String sql = "INSERT INTO lifecycle_state (timestamp, state) VALUES (?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, state) VALUES (?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.wldt.exception.StorageException;
 import it.wldt.storage.model.StorageStatsRecord;
 import it.wldt.storage.model.physical.PhysicalRelationshipInstanceVariationRecord;
+import it.wldt.storage.postgres.model.common.PostgresWldtTableType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class PostgresPhysicalRelationshipInstanceVariationService {
     private final Connection connection;
     private final ObjectMapper objectMapper;
+
+    private static final String TABLE_NAME = PostgresWldtTableType.PHYSICAL_ASSET_RELATIONSHIP_INSTANCE_CREATED_NOTIFICATION.getTableName();
 
     // Default constructor
     public PostgresPhysicalRelationshipInstanceVariationService(Connection connection) {
@@ -38,7 +41,7 @@ public class PostgresPhysicalRelationshipInstanceVariationService {
     @param record  The WLDT core record to save
      */
     public void saveRecord(PhysicalRelationshipInstanceVariationRecord record) throws StorageException {
-        String sql = "INSERT INTO physical_relationship_instance_variation (timestamp, instance_key, instance_target_id, relationship_name, relationship_type, data) VALUES (?, ?, ?, ?, ?, ?::jsonb)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (timestamp, instance_key, instance_target_id, relationship_name, relationship_type, data) VALUES (?, ?, ?, ?, ?, ?::jsonb)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             // Timestamp
