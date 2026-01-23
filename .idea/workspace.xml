@@ -6,9 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="67417f63-a866-49a5-aa38-0922ae183bdc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/67571644-b617-4877-b7ec-faa4bcf46829/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/model/common/PostgresWldtTableType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/model/common/PostgresWldtTableType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/model/physical/PostgresPhysicalAssetDescriptionNotificationRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/model/physical/PostgresPhysicalAssetDescriptionNotificationRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetDescriptionNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetDescriptionNotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetEventNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetEventNotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetPropertyVariationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetPropertyVariationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalRelationshipInstanceVariationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +100,7 @@
     "Database Script.Query.sql.executor": "Run",
     "Docker.docker.postgres: Compose Deployment.executor": "Run",
     "Docker.docker: Compose Deployment.executor": "Run",
+    "Gradle.Build wldt-storage-postgres.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "Gradle.PostgresWldtStorageTest.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testDigitalActionRequest.executor": "Run",
@@ -98,6 +113,7 @@
     "Gradle.PostgresWldtStorageTest.testSaveDigitalTwinState.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testSaveLifeCycleState.executor": "Run",
     "Gradle.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor": "Run",
+    "JUnit.PostgresWldtStorageTest.executor": "Run",
     "JUnit.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor": "Run",
     "JUnit.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor": "Run",
     "JUnit.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor": "Run",
@@ -181,6 +197,21 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="PostgresWldtStorageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wldt-storage-postgres.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.wldt.storage.postgres.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.wldt.storage.postgres" />
+      <option name="MAIN_CLASS_NAME" value="it.wldt.storage.postgres.PostgresWldtStorageTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="wldt-storage-postgres.test" />
       <extension name="coverage">
@@ -192,22 +223,6 @@
       <option name="PACKAGE_NAME" value="it.wldt.storage.postgres" />
       <option name="MAIN_CLASS_NAME" value="it.wldt.storage.postgres.PostgresWldtStorageTest" />
       <option name="METHOD_NAME" value="testPhysicalAssetDescriptionNotification" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="wldt-storage-postgres.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.wldt.storage.postgres.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.wldt.storage.postgres" />
-      <option name="MAIN_CLASS_NAME" value="it.wldt.storage.postgres.PostgresWldtStorageTest" />
-      <option name="METHOD_NAME" value="testPhysicalRelationshipInstanceVariation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -238,18 +253,18 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.PostgresWldtStorageTest" />
+        <item itemvalue="JUnit.PostgresWldtStorageTest" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification" />
         <item itemvalue="JUnit.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification" />
         <item itemvalue="JUnit.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" />
-        <item itemvalue="JUnit.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
       </set>
     </attachedChunks>
   </component>
@@ -274,6 +289,13 @@
       <workItem from="1766132822979" duration="4666000" />
       <workItem from="1766137711292" duration="219000" />
       <workItem from="1766222070446" duration="1784000" />
+      <workItem from="1768983172976" duration="677000" />
+      <workItem from="1768984053235" duration="150000" />
+      <workItem from="1768984273219" duration="7520000" />
+      <workItem from="1769071978511" duration="5016000" />
+      <workItem from="1769090570390" duration="883000" />
+      <workItem from="1769099159272" duration="955000" />
+      <workItem from="1769157373570" duration="7720000" />
     </task>
     <servers />
   </component>

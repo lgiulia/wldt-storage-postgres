@@ -17,7 +17,7 @@ public class PostgresPhysicalAssetDescriptionNotificationRecord {
     }
 
     /* Constructors of physical asset description notification record
-    @param notificationTImestamp  TImestamp of the notification
+    @param notificationTimestamp  Timestamp of the notification
     @param adapterId  ID of the adapter associated with the notification
     @param physicalAssetDescription  Description of the physical asset associated with the notification
      */
