@@ -202,7 +202,7 @@ public class PostgresWldtStorageTest {
                 description
         );
 
-        storage.saveNewPhysicalAssetDescriptionNotification(notification);
+        storage.saveUpdatedPhysicalAssetDescriptionNotification(notification);
 
         logger.info("Test updatedPhysicalAssetDescriptionNotification: PASSED");
     }
@@ -223,12 +223,19 @@ public class PostgresWldtStorageTest {
                 metadata
         );
 
-        PhysicalRelationshipInstanceVariation variation = new PhysicalRelationshipInstanceVariation(
+        // Relationship creation saved
+        PhysicalRelationshipInstanceVariation createVariation = new PhysicalRelationshipInstanceVariation(
                 System.currentTimeMillis(),
                 instance
         );
+        storage.savePhysicalAssetRelationshipInstanceCreatedNotification(createVariation);
 
-        storage.savePhysicalAssetRelationshipInstanceCreatedNotification(variation);
+        // Relationship cancellation saved
+        PhysicalRelationshipInstanceVariation deleteVariation = new PhysicalRelationshipInstanceVariation(
+                System.currentTimeMillis() + 1000,
+                instance
+        );
+        storage.savePhysicalAssetRelationshipInstanceDeletedNotification(deleteVariation);
 
         logger.info("Test PhysicalRelationshipInstanceVariation: PASSED");
     }
