@@ -7,6 +7,7 @@ import it.wldt.core.engine.LifeCycleStateVariation;
 import it.wldt.core.state.*;
 import it.wldt.exception.StorageException;
 import it.wldt.exception.WldtDigitalTwinStateException;
+import it.wldt.storage.model.physical.PhysicalAssetEventNotificationRecord;
 import it.wldt.storage.postgres.model.common.PostgresWldtStorageConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PostgresWldtStorageTest {
     private static final Logger logger = LoggerFactory.getLogger(PostgresWldtStorageTest.class);
@@ -101,17 +101,43 @@ public class PostgresWldtStorageTest {
     public void testPhysicalEventNotification() throws StorageException {
         logger.info("Testing PhysicalAssetEventNotification...");
 
+        long timestamp = System.currentTimeMillis();
+
+        // Data creation
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("sensor-id", "temp-001");
 
         PhysicalAssetEventNotification notification = new PhysicalAssetEventNotification(
-                System.currentTimeMillis(),
+                timestamp,
                 "alarm-high-temp",
                 "Temperature is over 100!",
                 metadata
         );
 
+        // Data saving
         storage.savePhysicalAssetEventNotification(notification);
+
+        // Data reading
+        int count = storage.getPhysicalAssetEventNotificationCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<PhysicalAssetEventNotificationRecord> timeList = storage.getPhysicalAssetEventNotificationInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            PhysicalAssetEventNotificationRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getEventkey() + "' Timestamp=" + r.getTimestamp());
+            assertEquals("temp-001", r.getMetadata().get("sensor-id"));
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<PhysicalAssetEventNotificationRecord> pageList = storage.getPhysicalAssetEventNotificationInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test PhysicalAssetEventNotification: PASSED");
     }
