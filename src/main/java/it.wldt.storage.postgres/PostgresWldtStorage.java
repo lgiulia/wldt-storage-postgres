@@ -239,16 +239,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getPhysicalAssetEventNotificationCount() throws StorageException {
+        if (this.physicalAssetEventNotificationService != null) {
+            return this.physicalAssetEventNotificationService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<PhysicalAssetEventNotificationRecord> getPhysicalAssetEventNotificationInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.physicalAssetEventNotificationService != null) {
+            return this.physicalAssetEventNotificationService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<PhysicalAssetEventNotificationRecord> getPhysicalAssetEventNotificationInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int totalCount = getPhysicalAssetEventNotificationCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.physicalAssetEventNotificationService != null) {
+            return this.physicalAssetEventNotificationService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -267,16 +279,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getPhysicalAssetActionRequestCount() throws StorageException {
+        if (this.physicalAssetActionRequestService != null) {
+            return this.physicalAssetActionRequestService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<PhysicalAssetActionRequestRecord> getPhysicalAssetActionRequestInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.physicalAssetActionRequestService != null) {
+            return this.physicalAssetActionRequestService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<PhysicalAssetActionRequestRecord> getPhysicalAssetActionRequestInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int totalCount = getPhysicalAssetActionRequestCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.physicalAssetActionRequestService != null) {
+            return this.physicalAssetActionRequestService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -295,16 +319,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getDigitalActionRequestCount() throws StorageException {
+        if (this.digitalActionRequestService != null) {
+            return this.digitalActionRequestService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<DigitalActionRequestRecord> getDigitalActionRequestInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.digitalActionRequestService != null) {
+            return this.digitalActionRequestService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<DigitalActionRequestRecord> getDigitalActionRequestInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int totalCount = getDigitalActionRequestCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.digitalActionRequestService != null) {
+            return this.digitalActionRequestService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -322,16 +358,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getNewPhysicalAssetDescriptionNotificationCount() throws StorageException {
+        if (this.physicalAssetDescriptionNotificationService != null) {
+            return this.physicalAssetDescriptionNotificationService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<PhysicalAssetDescriptionNotificationRecord> getNewPhysicalAssetDescriptionNotificationInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.physicalAssetDescriptionNotificationService != null) {
+            return this.physicalAssetDescriptionNotificationService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<PhysicalAssetDescriptionNotificationRecord> getNewPhysicalAssetDescriptionNotificationInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int totalCount = getNewPhysicalAssetDescriptionNotificationCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.physicalAssetDescriptionNotificationService != null) {
+            return  this.physicalAssetDescriptionNotificationService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
