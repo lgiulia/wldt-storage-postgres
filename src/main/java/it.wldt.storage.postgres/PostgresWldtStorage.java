@@ -148,21 +148,36 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public Optional<DigitalTwinStateRecord> getLastDigitalTwinState() throws StorageException {
+        if (this.digitalTwinStateService != null) {
+            return this.digitalTwinStateService.getLastRecord();
+        }
         return Optional.empty();
     }
 
     @Override
     public int getDigitalTwinStateCount() throws StorageException {
+        if (this.digitalTwinStateService != null) {
+            return this.digitalTwinStateService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<DigitalTwinStateRecord> getDigitalTwinStateInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.digitalTwinStateService != null) {
+            return this.digitalTwinStateService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<DigitalTwinStateRecord> getDigitalTwinStateInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int count = getDigitalTwinStateCount();
+        this.checkRange(startIndex, endIndex, count);
+        if (this.digitalTwinStateService != null) {
+            return this.digitalTwinStateService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -180,16 +195,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getDigitalTwinStateEventNotificationCount() throws StorageException {
+        if (this.digitalTwinStateEventNotificationService != null) {
+            return this.digitalTwinStateEventNotificationService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<DigitalTwinStateEventNotificationRecord> getDigitalTwinStateEventNotificationInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.digitalTwinStateEventNotificationService != null) {
+            return this.digitalTwinStateEventNotificationService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<DigitalTwinStateEventNotificationRecord> getDigitalTwinStateEventNotificationInRange(int startIndex, int endIndex) throws StorageException, IllegalArgumentException {
+        int totalCount = getDigitalActionRequestCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.digitalTwinStateEventNotificationService != null) {
+            return  this.digitalTwinStateEventNotificationService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -206,21 +233,36 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public LifeCycleVariationRecord getLastLifeCycleState() throws StorageException {
+        if (this.lifeCycleStateService != null) {
+            return this.lifeCycleStateService.getLastRecord();
+        }
         return null;
     }
 
     @Override
     public int getLifeCycleStateCount() throws StorageException {
+        if (this.lifeCycleStateService != null) {
+            return this.lifeCycleStateService.getRecordCount();
+        }
         return 0;
     }
 
     @Override
     public List<LifeCycleVariationRecord> getLifeCycleStateInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.lifeCycleStateService != null) {
+            return this.lifeCycleStateService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<LifeCycleVariationRecord> getLifeCycleStateInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int count = getLifeCycleStateCount();
+        this.checkRange(startIndex, endIndex, count);
+        if (this.lifeCycleStateService != null) {
+            return this.lifeCycleStateService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
@@ -425,16 +467,28 @@ public class PostgresWldtStorage extends WldtStorage {
 
     @Override
     public int getPhysicalAssetPropertyVariationCount() throws StorageException {
+        if (this.physicalAssetPropertyVariationService != null) {
+            return this.physicalAssetPropertyVariationService.getRecordsCount();
+        }
         return 0;
     }
 
     @Override
     public List<PhysicalAssetPropertyVariationRecord> getPhysicalAssetPropertyVariationInTimeRange(long startTimestampMs, long endTimestampMs) throws StorageException, IllegalArgumentException {
+        this.checkTimeRange(startTimestampMs, endTimestampMs);
+        if (this.physicalAssetPropertyVariationService != null) {
+            return this.physicalAssetPropertyVariationService.getRecordsInTimeRange(startTimestampMs, endTimestampMs);
+        }
         return Collections.emptyList();
     }
 
     @Override
     public List<PhysicalAssetPropertyVariationRecord> getPhysicalAssetPropertyVariationInRange(int startIndex, int endIndex) throws StorageException, IndexOutOfBoundsException, IllegalArgumentException {
+        int totalCount = getPhysicalAssetPropertyVariationCount();
+        this.checkRange(startIndex, endIndex, totalCount);
+        if (this.physicalAssetPropertyVariationService != null) {
+            return  this.physicalAssetPropertyVariationService.getRecordsInRange(startIndex, endIndex);
+        }
         return Collections.emptyList();
     }
 
