@@ -7,17 +7,22 @@ import it.wldt.core.engine.LifeCycleStateVariation;
 import it.wldt.core.state.*;
 import it.wldt.exception.StorageException;
 import it.wldt.exception.WldtDigitalTwinStateException;
+import it.wldt.exception.WldtDigitalTwinStatePropertyException;
+import it.wldt.storage.model.digital.DigitalActionRequestRecord;
+import it.wldt.storage.model.lifecycle.LifeCycleVariationRecord;
+import it.wldt.storage.model.physical.PhysicalAssetActionRequestRecord;
+import it.wldt.storage.model.physical.PhysicalAssetDescriptionNotificationRecord;
 import it.wldt.storage.model.physical.PhysicalAssetEventNotificationRecord;
+import it.wldt.storage.model.physical.PhysicalAssetPropertyVariationRecord;
+import it.wldt.storage.model.state.DigitalTwinStateEventNotificationRecord;
+import it.wldt.storage.model.state.DigitalTwinStateRecord;
 import it.wldt.storage.postgres.model.common.PostgresWldtStorageConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,7 +65,25 @@ public class PostgresWldtStorageTest {
         DigitalTwinState state = digitalTwinStateManager.getDigitalTwinState();
         List<DigitalTwinStateChange> changes = new ArrayList<>();
 
+        // Data saving
         storage.saveDigitalTwinState(state, changes);
+
+        // Data reading
+        Optional<DigitalTwinStateRecord> lastStateOpt = storage.getLastDigitalTwinState();
+        assertTrue(lastStateOpt.isPresent(), "Error: no record found!");
+        if (lastStateOpt.isPresent()) {
+            DigitalTwinStateRecord record = lastStateOpt.get();
+            assertNotNull(record.getCurrentState(), "State can't be null");
+            String stateAsString = record.getCurrentState().toString();
+            logger.info("       -> State: " + stateAsString);
+            if (stateAsString.contains("temperature")) {
+                logger.info("       -> String contains 'temperature'");
+            }
+        }
+
+        int count = storage.getDigitalTwinStateCount();
+        logger.info("Total Count: " + count);
+        assertTrue(count > 0);
 
         logger.info("Test saveDigitalTwinState: PASSED");
     }
@@ -70,13 +93,41 @@ public class PostgresWldtStorageTest {
     public void testDigitalTwinStateEventNotification() throws StorageException {
         logger.info("Testing digitalTwinStateEventNotification...");
 
+        long timestamp = System.currentTimeMillis();
+        String eventKey = "computation-completed";
+        String eventBody = "Result: 99,9%";
+
         DigitalTwinStateEventNotification<String> notification = new DigitalTwinStateEventNotification<>(
-                "computation-completed",
-                "Result: 99,9%",
+                eventKey,
+                eventBody,
                 System.currentTimeMillis()
         );
 
+        // Data saving
         storage.saveDigitalTwinStateEventNotification(notification);
+
+        // Data reading
+        int count = storage.getDigitalTwinStateEventNotificationCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<DigitalTwinStateEventNotificationRecord> timeList = storage.getDigitalTwinStateEventNotificationInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            DigitalTwinStateEventNotificationRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getEventKey() + "' Timestamp=" + r.getTimestamp());
+            assertEquals(eventKey, r.getEventKey());
+            assertEquals(eventBody, r.getBody());
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<DigitalTwinStateEventNotificationRecord> pageList = storage.getDigitalTwinStateEventNotificationInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test saveDigitalTwinStateEventNotification: PASSED");
     }
@@ -86,12 +137,33 @@ public class PostgresWldtStorageTest {
     public void testSaveLifeCycleState() throws StorageException{
         logger.info("Testing saveLifeCycleState...");
 
+        long timestamp  = System.currentTimeMillis();
+        LifeCycleState expectedState = LifeCycleState.STARTED;
+
         LifeCycleStateVariation variation = new LifeCycleStateVariation(
-                System.currentTimeMillis(),
-                LifeCycleState.STARTED
+                timestamp,
+                expectedState
         );
 
+        // Data saving
         storage.saveLifeCycleState(variation);
+
+        // Data reading
+        LifeCycleVariationRecord lastRecord = storage.getLastLifeCycleState();
+        assertNotNull(lastRecord, "Last record can't be null");
+        logger.info("Last Record State: " + lastRecord.getLifeCycleState());
+        assertEquals(expectedState, lastRecord.getLifeCycleState(), "Read Lifecycle state equals written Lifecycle state");
+
+        int count = storage.getLifeCycleStateCount();
+        logger.info("Total Count: " + count);
+        assertTrue(count > 0);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<LifeCycleVariationRecord> timeList = storage.getLifeCycleStateInTimeRange(start, end);
+        logger.info("Time Range: Found " + timeList.size());
+        assertFalse(timeList.isEmpty());
+        assertEquals(expectedState, timeList.get(0).getLifeCycleState());
 
         logger.info("Test saveLifeCycleState: PASSED");
     }
@@ -147,17 +219,46 @@ public class PostgresWldtStorageTest {
     public void testPhysicalAssetActionRequest() throws StorageException {
         logger.info("Testing PhysicalAssetActionRequest...");
 
+        long timestamp = System.currentTimeMillis();
+
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("user-initiator", "admin");
 
+        String uniqueKey = "switch-off-light";
+        String jsonBody = "{\"zone\":\"kitchen\" }";
+
         PhysicalAssetActionRequest request = new PhysicalAssetActionRequest(
                 System.currentTimeMillis(),
-                "switch-off-light",
-                "{\"zone\":\"kitchen\" }",
+                uniqueKey,
+                jsonBody,
                 metadata
         );
 
+        // Data saving
         storage.savePhysicalAssetActionRequest(request);
+
+        // Data reading
+        int count = storage.getPhysicalAssetActionRequestCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<PhysicalAssetActionRequestRecord> timeList = storage.getPhysicalAssetActionRequestInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            PhysicalAssetActionRequestRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getActionkey() + "' Timestamp=" + r.getRequestTimestamp());
+            assertEquals(uniqueKey, r.getActionkey());
+            assertEquals("admin", r.getRequestMetadata().get("user-initiator"));
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<PhysicalAssetActionRequestRecord> pageList = storage.getPhysicalAssetActionRequestInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test Physical Asset Action Request: PASSED");
     }
@@ -167,14 +268,42 @@ public class PostgresWldtStorageTest {
     public void testPhysicalAssetPropertyVariation() throws StorageException {
         logger.info("Testing PhysicalAssetPropertyVariation...");
 
+        long timestamp = System.currentTimeMillis();
+        String propertyKey = "temperature";
+        double propertyValue = 26.5;
+
         PhysicalAssetPropertyVariation variation = new PhysicalAssetPropertyVariation(
-                System.currentTimeMillis(),
-                "temperature",
-                26.5,
+                timestamp,
+                propertyKey,
+                propertyValue,
                 new HashMap<>()
         );
 
+        // Data saving
         storage.savePhysicalAssetPropertyVariation(variation);
+
+        // Data reading
+        int count = storage.getPhysicalAssetPropertyVariationCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<PhysicalAssetPropertyVariationRecord> timeList = storage.getPhysicalAssetPropertyVariationInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            PhysicalAssetPropertyVariationRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getPropertykey() + "' Timestamp=" + r.getTimestamp());
+            assertEquals(propertyKey, r.getPropertykey());
+            assertEquals(propertyValue, r.getBody());
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<PhysicalAssetPropertyVariationRecord> pageList = storage.getPhysicalAssetPropertyVariationInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test PhysicalAssetPropertyVariation: PASSED");
     }
@@ -183,6 +312,9 @@ public class PostgresWldtStorageTest {
     @Test
     public void testPhysicalAssetDescriptionNotification() throws StorageException {
         logger.info("Testing PhysicalAssetDescriptionNotification...");
+
+        long timestamp = System.currentTimeMillis();
+        String adapterId = "test-adapter-01";
 
         List<PhysicalAssetProperty<?>> properties = new ArrayList<>();
         properties.add(new PhysicalAssetProperty<>("temperature", 20.0));
@@ -198,11 +330,37 @@ public class PostgresWldtStorageTest {
 
         PhysicalAssetDescriptionNotification notification = new PhysicalAssetDescriptionNotification(
                 System.currentTimeMillis(),
-                "test-adapter-01",
+                adapterId,
                 description
         );
 
+        // Data saving
         storage.saveNewPhysicalAssetDescriptionNotification(notification);
+
+        // Data reading
+        int count = storage.getNewPhysicalAssetDescriptionNotificationCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<PhysicalAssetDescriptionNotificationRecord> timeList = storage.getNewPhysicalAssetDescriptionNotificationInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            PhysicalAssetDescriptionNotificationRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getAdapterId() + "' Timestamp=" + r.getNotificationTimestamp());
+            assertEquals(adapterId, r.getAdapterId());
+            assertNotNull(r.getPhysicalAssetDescription(), "Description can't be null");
+            assertFalse(r.getPhysicalAssetDescription().getProperties().isEmpty(), "Properties can't be empty");
+            logger.info("       -> Properties found: " + r.getPhysicalAssetDescription().getProperties().size());
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<PhysicalAssetDescriptionNotificationRecord> pageList = storage.getNewPhysicalAssetDescriptionNotificationInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test PhysicalAssetDescriptionNotification: PASSED");
     }
@@ -271,18 +429,46 @@ public class PostgresWldtStorageTest {
     public void testDigitalActionRequest() throws StorageException {
         logger.info("Testing DigitalActionRequest...");
 
+        long timestamp = System.currentTimeMillis();
+
+        // Data creation
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("user-role", "admin");
         metadata.put("priority", "high");
 
+        String uniqueKey = "backup-system-" + timestamp;
+
         DigitalActionRequest request = new DigitalActionRequest(
-                System.currentTimeMillis(),
-                "backup-system",
+                timestamp,
+                uniqueKey,
                 "full-backup",
                 metadata
         );
 
+        // Data saving
         storage.saveDigitalActionRequest(request);
+
+        // Data reading
+        int count = storage.getDigitalActionRequestCount();
+        logger.info("Records found: " + count);
+        assertNotNull(count);
+
+        long start = timestamp - 5000;
+        long end = timestamp + 5000;
+        List<DigitalActionRequestRecord> timeList = storage.getDigitalActionRequestInTimeRange(start, end);
+        logger.info("Time Range (" + start + " - " + end + ") ---> " + timeList.size());
+        if (!timeList.isEmpty()) {
+            DigitalActionRequestRecord r = timeList.get(0);
+            logger.info("       -> Key='" + r.getActionkey() + "' Timestamp=" + r.getRequestTimestamp());
+            assertEquals("admin", r.getRequestMetadata().get("user-role"));
+        }
+
+        if (count > 0) {
+            int startIndex = 0;
+            int endIndex = 1;
+            List<DigitalActionRequestRecord> pageList = storage.getDigitalActionRequestInRange(startIndex, endIndex);
+            logger.info("Pagination range (Index " + startIndex + " - " + endIndex + ") ---> " + pageList.size());
+        }
 
         logger.info("Test DigitalActionRequest: PASSED");
     }
