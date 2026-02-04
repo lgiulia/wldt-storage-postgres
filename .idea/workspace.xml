@@ -7,10 +7,10 @@
     <list default="true" id="67417f63-a866-49a5-aa38-0922ae183bdc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/PostgresWldtStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/digital/PostgresDigitalActionRequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetActionRequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetDescriptionNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetDescriptionNotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetEventNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetEventNotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/lifecycle/PostgresLifeCycleStateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetPropertyVariationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/physical/PostgresPhysicalAssetPropertyVariationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateEventNotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it.wldt.storage.postgres/service/state/PostgresDigitalTwinStateService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/wldt/storage/postgres/PostgresWldtStorageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,56 +84,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Database Script.Query.sql.executor": "Run",
-    "Docker.docker.postgres: Compose Deployment.executor": "Run",
-    "Docker.docker: Compose Deployment.executor": "Run",
-    "Gradle.Build wldt-storage-postgres.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testDigitalActionRequest.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testPhysicalAssetActionRequest.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testPhysicalEventNotification.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testSaveDigitalTwinState.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testSaveLifeCycleState.executor": "Run",
-    "Gradle.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor": "Run",
-    "JUnit.PostgresWldtStorageTest.executor": "Run",
-    "JUnit.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor": "Run",
-    "JUnit.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor": "Run",
-    "JUnit.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "datagrid.heatmap.switchedByDefault": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Database Script.Query.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build wldt-storage-postgres.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testDigitalActionRequest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testPhysicalAssetActionRequest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testPhysicalEventNotification.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testSaveDigitalTwinState.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testSaveLifeCycleState.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostgresWldtStorageTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;datagrid.heatmap.switchedByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "67571644-b617-4877-b7ec-faa4bcf46829"
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;67571644-b617-4877-b7ec-faa4bcf46829&quot;
     ]
   }
-}]]></component>
-  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testPhysicalEventNotification">
-    <configuration name="PostgresWldtStorageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+}</component>
+  <component name="RunManager" selected="Gradle.PostgresWldtStorageTest.testSaveLifeCycleState">
+    <configuration name="PostgresWldtStorageTest.testDigitalTwinStateEventNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -146,7 +146,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testDigitalTwinStateEventNotification&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -187,7 +187,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalEventNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostgresWldtStorageTest.testPhysicalAssetPropertyVariation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -200,7 +200,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalEventNotification&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -214,7 +214,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostgresWldtStorageTest.testSaveDigitalTwinState" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -227,7 +227,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testSaveDigitalTwinState&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -241,7 +241,7 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
-    <configuration name="PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostgresWldtStorageTest.testSaveLifeCycleState" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -254,7 +254,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification&quot;" />
+            <option value="&quot;it.wldt.storage.postgres.PostgresWldtStorageTest.testSaveLifeCycleState&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -276,11 +276,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalEventNotification" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalRelationshipInstanceVariation" />
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testSaveLifeCycleState" />
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testSaveDigitalTwinState" />
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testDigitalTwinStateEventNotification" />
+        <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetPropertyVariation" />
         <item itemvalue="Gradle.PostgresWldtStorageTest.testPhysicalAssetDescriptionNotification" />
-        <item itemvalue="Gradle.PostgresWldtStorageTest.testUpdatedPhysicalAssetDescriptionNotification" />
       </list>
     </recent_temporary>
   </component>
@@ -323,6 +323,7 @@
       <workItem from="1769419743519" duration="3875000" />
       <workItem from="1769586310375" duration="12016000" />
       <workItem from="1769676566225" duration="8178000" />
+      <workItem from="1770194208061" duration="9295000" />
     </task>
     <servers />
   </component>
